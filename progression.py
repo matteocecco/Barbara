@@ -1,10 +1,7 @@
 import tavern
 import constructors
+import sys
 
-
-def  innkeeper_dialogue():
-    print("\tThe innkeeper greets you. He looks angry")
-    
 
 def trade():
     pass
@@ -12,6 +9,8 @@ def trade():
 
 def text_break():
     stop = raw_input()
+    if stop == "exit":
+        sys.exit()
     return stop
 
 while True:
