@@ -6,6 +6,8 @@ def dialogue(questions, answers):                                               
         print("\t%s" % question)                                                    #print every question on a separate line
     while True:                                                                     #bit more complicated.  Loop to verify that the input is an integer (else the program would break)
         choice = raw_input()                                                        #take the input
+        if choice:
+            pass
         try:                                                                        #try/except. Try to do this:
             choice_int = int(choice)                                                #convert choice to integer (iirc input() takes only strings)
             break                                                                   #exit loop if it works
@@ -17,7 +19,19 @@ def dialogue(questions, answers):                                               
 
 
 def continued_dialogue(first_question, questions, answers):
-    dialogue(questions[first_question], answers[first_question])
+    l = []
+    if type(first_question) is int:
+        value = dialogue(questions[first_question], answers[first_question])
+        l = (first_question, value)
+    elif type(first_question) is list:
+        tup = tuple(first_question)
+        value = dialogue(questions[tup], answers[tup])
+        back_to_list = list(tup)
+        back_to_list.append(value)
+        l = tuple(back_to_list)
+    else:
+        print type(first_question)
+    return list(l)
 
 
 def player_choice(printed_text, expected_input):
