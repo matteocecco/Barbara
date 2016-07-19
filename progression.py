@@ -24,14 +24,13 @@ while True:
     
     tavern_dialogue = constructors.dialogue(tavern.first_questions, tavern.first_answers)
     tavern_continuation = constructors.continued_dialogue(tavern_dialogue, tavern.second_questions, tavern.second_answers)
-    print tavern_continuation
-    print("You see two man quietly drinking something. In the far corner, a woman is sitting on a man's lap")
+    print("\tYou see two men quietly drinking something. In the far corner, a woman is sitting on a man's lap")
     choice = constructors.player_choice(tavern.interaction_decision, tavern.interaction_input)
     conversation = 0
     if choice == "1":
-        conversation = constructors.continued_dialogue(tavern_continuation, tavern.men_questions, tavern.men_answers)
+        conversation = constructors.dialogue(tavern.men_questions, tavern.men_answers)
     elif choice == "2":
-        conversation = constructors.continued_dialogue(tavern_continuation, tavern.woman_questions, tavern.woman_answers)
+        conversation = constructors.dialogue(tavern.woman_questions, tavern.woman_answers)
 
     trade()
     
