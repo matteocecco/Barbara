@@ -54,7 +54,7 @@ def dice_roll():
     return random.randint(1, 20)
 
 """
-def pcheck(user, check, check_find, max_find, critical_failure):        #to use when player class and object are created
+def pcheck(user, check, check_find, max_find, critical_failure):        #perception check, to use when player class and object are created
     dice = dice_roll()
     combined = user.stats['str'] + dice
     if combined >= check and dice == 20:
@@ -70,3 +70,22 @@ def pcheck(user, check, check_find, max_find, critical_failure):        #to use 
         print("\t%s" % critical_failure)
         return -1
 """
+example_questions = ["(1)Question 1", "(2)Question 2"]                                      #could be more than just two questions, but it's easier
+example_answers = ["Answer to question 1", "Answer to question 2"]
+example_dialogue = dialogue(example_questions, example_answers)
+
+continued_questions = {1: ["(1)I guess you chose question 1 before", "(2)Again, you chose question 1 first"],
+                        2: ["(1)You must have chosen question 2 earlier", "(2)Booyah! Question 2, amirite?"]}
+continued_answers = {1: ["Heh, you chose 1 both times. Consistent", "First 1, now 2."],
+                        2: ["first 2, now 1? Ok", "2, and 2 again? Consistency is the key"]}
+continued_example_dialogue = continued_dialogue(example_dialogue, continued_questions, continued_answers)
+
+last_example_questions = {(1, 1): ["Let's make this quick. You chose, 1, then 1, now this is 1 again", "1, then 1, now 2"],
+                            (1, 2): ["1, then 2, now 1", "1, then 2, now 2"],
+                            (2, 1): ["2, then 1, now 1 again", "2, then 1, now 2"],
+                            (2, 2): ["2, then 2, now 1", "2, then 2, now 2"]}
+last_example_answers = {(1, 1): ["1-1-1", "1-1-2"],
+                        (1, 2): ["1-2-1", "1-2-2"],
+                        (2, 1): ["2-1-1", "2-1-2"],
+                        (2, 2): ["2-2-1", "2-2-2"]}
+last_example = continued_dialogue(continued_example_dialogue, last_example_questions, last_example_answers)
