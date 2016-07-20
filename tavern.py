@@ -1,4 +1,4 @@
-
+#mostly questions and answers to import in progression.py module. Theoretically everything that happens in the tavern should stay here will happen someday
 first_questions = ["(1)I have lost my memory. Do you know who I am?", "(2)I must have gotten drunk. What happened yesterday?"]
 first_answers = ["He shakes his head.\n\t\"You got really drunk here last night, but I never saw you before that.\"",
                  "He tries to remember.\n\t\"You got really drunk yesterday. You passed out and hit your head on the table. "
