@@ -1,0 +1,50 @@
+import sys ==> import a module
+
+def function_name(parameter1, parameterN):
+    write body of function here
+    return something
+
+data types: int, float, str, list, dictionary, tuple
+list: an array. Ordered sequence of elements my_list = [var1, var2, varn]. can be modified during runtime. you can call a value by writing my_list[offset]
+dictionary: values with an identifying key. my_dict = {key: value, key: value}. Can be modified during runtime. You can call a value by writing my_dict[key]
+tuple: ordered sequence of elements. my_tuple = (value, value, value). Cannot be modified during runtime. You can call a value by writing my_tuple[offset]
+
+Remember, no braces needed in python. Easter egg: try running "from __future__ import braces" in idle
+
+def dialogue(questions, answers): #define the dialogue function (no need to specify var type)
+    choice_int = 1 #to avid breaking the function in case of one question dialogue where you can't choose the answer
+    for question in questions: #for loop in python. C++ version would be for(int i = 0; i < number of questions; i++). Python is faster to type and more readable. The loop cycles through the elements in the "questions" parameter of the function (it has to be a list, tuple, dictionary or string to work, a non iterable element will throw an error) and print out every element of "questions"
+    print("\t%s" % question) #print a tab (\t, makes it look better in console), and a string (%s is the string placeholder. After the closing ", you write what the placeholder stands for)
+    if len(questions) > 1: #if there's more than one question
+        while True: #infinite loop
+            choice = raw_input() #save the input (chosen question) in the choice variable
+            try: #a very handy python tool.
+                choice_int = int(choice) #raw_input saves input as a string. now we try to convert ths string to an integer
+                break #exit the infinite loop. This line will only be reached if the previous line worked
+            except ValueError: #if int(choice) doesn't work because choice is the wrong type (letters, which can't be converted to integers), python will throw a ValueError.
+                print("message") #message will be printed and the loop will start again from choice = raw_intput()
+    else: #if there's one question only
+        raw_input() #just wait for any input by the user
+    choice = choice_int - 1 #the first answer will be listed as 1 on screen, but list offsets start from 0, so we align input with offsets.
+    print(answers[choice]) #print the element in the answers list corresponding to the choice the player did
+    return choice_int #return the question asked (and the answer given) as a number, will need to build multilevel dialogues
+
+def continued_dialogue(first_question, questions, answers): #for multilevel dialogue, we need to know what our character heard from others (first_question). This can go on infinitely, although it can get long and tedious after a while
+    values = [] #we need this empty list
+    if type(first_question is int: #sanity check, first_question has to be an int or a list to have this function work
+        value = dialogue(questions[first_question, answers[first_question]) #this function calls the original dialogue function, but this tme questions and aswers are stored in a dictionary where every key stands for first_question, and its value is the question (or list of questions) you unlocked in previous conversations. Ex:
+        start_questions = [q1, q2, q3]
+        continued_questions = {1: [q1.1, q1.2], 2: [q2.1, q2.2], 3: [q3.1, q3.2, q3.3]}
+        continued_answers = {1: [a1.1, a1.2], 2: [a2.1, a2.2], 3: [a3.1, a3.2, a3.3]}
+        if we chose q2 from start_questions, dialogue will return 2, which will then be saved in first_question, making continued_dialogue choose q2.1 and q2.2 to print from continued_questions. See examples at the bottom of github page (code should actually run in theory).
+        values = (first_question, value) #we store the first_question and the answer we got now in a tuple (which is immutable, and we need this for our dictionary keys. Apparently lists don't work).
+    elif type(first_question) is list: #if first_question is a list, the conversation is influenced by more than just one previous conversation (see end of this function where the returned data is stored in a list)
+        tup = tuple(first_question) #we convert the list into a tuple to access the questions and answers dictionaries
+        value = dialogue(questions[tup], answers[tup]) #same principle as before, but this time the dictionary will look lile {(1, 1): [q1.1.1, q1.1.2, etc], (1, 2): [q1.2.1, q1.2.2], (2.1): [q2.1.1, q2.1.2, etc] and so on }, where (1, 1) means we chose the first option in the first conversation, and the first option in the second conversation. The answers dictionary will have the same format.
+        The answer we got will be saved in value.
+        back_to_list = list(tup) #now we need to have a list again, because tuples are immutable. The secret is that Python doesn't really convert one to the other. It creates a copy of tup and stores it in back_to_list
+        back_to_list.append(value) #we append the latest answer to back_to_list
+        values = tuple(back_to_list) #probably an unneccessary step, will test what happens without it
+    else:
+        print type(first_question) #for debugging, if first_question is neither int nor list we want to know what it is
+    return list(values) #yeah I don't know why I have this. Will have to look through it more thoroughly. Anyway, we save what we know and we can use this to progress even further
