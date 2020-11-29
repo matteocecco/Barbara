@@ -53,7 +53,6 @@ def player_choice(printed_text, expected_input):                                
 def dice_roll():                                                                        #dice roll, will need for skill checks  
     return random.randint(1, 20)                                                        #return a random integer between 1 and 20
 
-"""
 def pcheck(user, check, check_find, max_find, critical_failure):                        #perception check, to use when player class and object are created
     dice = dice_roll()
     combined = user.stats['str'] + dice
@@ -69,7 +68,7 @@ def pcheck(user, check, check_find, max_find, critical_failure):                
     elif combined < check and dice == 1:
         print("\t%s" % critical_failure)
         return -1
-"""
+
 example_questions = ["(1)Question 1", "(2)Question 2"]                                      #could be more than just two questions, but it's easier
 example_answers = ["Answer to question 1", "Answer to question 2"]
 example_dialogue = dialogue(example_questions, example_answers)
